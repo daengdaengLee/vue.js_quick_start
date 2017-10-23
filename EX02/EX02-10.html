@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>02-08_1</title>
+    <title>02-10</title>
     <style>
         #list {
             width: 400px;
@@ -17,6 +17,10 @@
             color: yellow;
             background-color: purple;
         }
+        .divider {
+            height: 2px;
+            background-color: gray;
+        }
     </style>
     <script src="https://unpkg.com/vue"></script>
 </head>
@@ -29,12 +33,17 @@
                 </tr>
             </thead>
             <tbody id="contacts">
-                <tr v-for="contact in contacts">
-                    <td>{{ contact.no }}</td>
-                    <td>{{ contact.name }}</td>
-                    <td>{{ contact.tel }}</td>
-                    <td>{{ contact.address }}</td>
-                </tr>
+                <template v-for="(contact, index) in contacts">
+                    <tr>
+                        <td>{{ contact.no }}</td>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.tel }}</td>
+                        <td>{{ contact.address }}</td>
+                    </tr>
+                    <tr class="divider" v-if="(index % 5) === 4">
+                        <td colspan="4"></td>
+                    </tr>
+                </template>
             </tbody>
         </table>
     </div>
