@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>03-04</title>
+    <title>03-04_1</title>
     <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
@@ -20,6 +20,7 @@
             },
             methods: {
                 sum: function() {
+                    console.log(Date.now());
                     var n = Number(this.num);
                     if (Number.isNaN(n) || n < 1) return 0;
                     return ((1 + n) * n) / 2;
