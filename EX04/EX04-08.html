@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>04-03</title>
+    <title>04-08</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
         .layout1 { margin: 30px 30px 30px 30px; }
@@ -13,6 +13,7 @@
     <div id="example" class="container layout1">
         <p><input type="text" v-model="amount" class="form-control"></p>
         <p>
+            <button id="create" v-on:click.once="specialEvent" class="btn btn-primary">계좌 개설 10000원 이벤트</button>
             <button id="deposit" v-on:click="deposit" class="btn btn-primary">예금</button>
             <button id="withdraw" v-on:click="withdraw" class="btn btn-primary">인출</button>
         </p>
@@ -26,6 +27,9 @@
             balance: 0
         },
         methods: {
+            specialEvent: function(e) {
+                this.balance += 10000;
+            },
             deposit: function(e) {
                 var amt = parseInt(this.amount);
                 if (amt <= 0) {
