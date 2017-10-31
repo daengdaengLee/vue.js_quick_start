@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>03-10</title>
+    <title>04-09</title>
     <style>
         #list { width: 400px; border: 1px solid black; border-collapse: collapse; }
         #list td, #list th { border: 1px solid black; text-align: center; }
@@ -13,7 +13,7 @@
 <body>
     <div id="example" v-cloak>
         <p>
-            이름 : <input type="text" v-model="name" placeholder="두자 이상 입력하세요">
+            이름 : <input type="text" v-model="name" v-on:keyup="search" placeholder="두글자 이상을 입력하세요">
         </p>
         <table id="list">
             <thead>
@@ -33,7 +33,6 @@
         <div v-show="isProcessing === true">조회중</div>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
     <script type="text/javascript">
@@ -44,17 +43,18 @@
             isProcessing: false,
             contactlist: []
         },
-        watch: {
-            name: function(val) {
-                if (val.length >= 2) {
-                    this.fetchContacts();
-                } else {
-                    this.contactlist = [];
-                }
-            }
-        },
         methods: {
-            fetchContacts: _.debounce(function() {
+            search: function(e) {
+                if (e.keyCode === 13) {
+                    var val = e.target.value;
+                    if (val.length >= 2) {
+                        this.fetchContacts();
+                    } else {
+                        this.contactlist = [];
+                    }
+                }
+            },
+            fetchContacts: function() {
                 this.contactlist = [];
                 this.isProcessing = true;
                 var url = "http://sample.bmaster.kro.kr/contacts_long/search/" + this.name;
@@ -69,7 +69,7 @@
                     vm.contactlist = [];
                     vm.isProcessing = false;
                 });
-            }, 300)
+            }
         }
     });
     </script>
