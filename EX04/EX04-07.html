@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>04-06</title>
+    <title>04-07</title>
     <style>
     #outer {
         width: 200px; height: 200px; border: solid 2px black;
@@ -19,8 +19,8 @@
 </head>
 <body>
     <div id="example">
-        <div id="outer" @click="outerClick">
-            <div id="inner" @click="innerClick"></div>
+        <div id="outer" @click.stop="outerClick">
+            <div id="inner" @click.stop="innerClick"></div>
         </div>
     </div>
 <script>
@@ -32,14 +32,12 @@ var vm = new Vue({
             console.log('Event Phase : ', e.eventPhase);
             console.log('Current Target : ', e.currentTarget);
             console.log('Target : ', e.target);
-            e.stopPropagation();
         },
         innerClick: function(e) {
             console.log('### INNER CLICK');
             console.log('Event Phase : ', e.eventPhase);
             console.log('Current Target : ', e.currentTarget);
             console.log('Target : ', e.target);
-            e.stopPropagation();
         }
     }
 });
