@@ -108,7 +108,7 @@ Vue.component('list-component', {
             if (done) return { checked: true };
             else return { checked: false};
         },
-        addTodo: fucntion(todo) {
+        addTodo: function(todo) {
             if (todo !== '') {
                 this.todolist.push({ todo: todo, done: false });
             }
