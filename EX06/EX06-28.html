@@ -89,7 +89,7 @@ ul li.checked::before {
 </script>
 <script type="text/javascript">
 Vue.component('list-component', {
-    template: '#list-component',
+    template: '#list-template',
     created: function() {
         eventBus.$on('add-todo', this.addTodo);
     },
