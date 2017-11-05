@@ -11,5 +11,5 @@ function Person(name, yearCount) {
     }
 }
 var p1 = new Person('홍길동', 20);
-// == this.age는 0이 출력됨.
+// == this.age는 20이 출력됨.
 console.log(p1.name + '님의 나이 : ' + p1.age);
