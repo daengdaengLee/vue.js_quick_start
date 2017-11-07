@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'public', 'dist'),
         filename: '[name].js',
-        publicPath: '/dist'
+        publicPath: '/dist/'
     },
     module: {
         rules: [{
@@ -21,5 +21,10 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin()
-    ]
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, 'public'),
+        port: 8080,
+        historyApiFallback: true
+    }
 }
