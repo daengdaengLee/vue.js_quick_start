@@ -1,0 +1,32 @@
+{
+  "name": "vue.js_quick_start",
+  "version": "1.0.0",
+  "description": "eslint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daengdaengLee/vue.js_quick_start.git"
+  },
+  "keywords": [
+    "eslint"
+  ],
+  "author": "kunholee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daengdaengLee/vue.js_quick_start/issues"
+  },
+  "homepage": "https://github.com/daengdaengLee/vue.js_quick_start#readme",
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-html": "^3.2.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-vue": "^3.13.1"
+  },
+  "dependencies": {}
+}

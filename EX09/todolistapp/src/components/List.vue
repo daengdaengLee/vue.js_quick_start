@@ -51,7 +51,11 @@ ul li.checked::before {
 </style>
 <template>
     <ul id="todolist">
-        <li v-for="(a, index) in todolist" v-bind:class="checked(a.done)" v-on:click="doneToggle(index)">
+        <li
+            v-for="(a, index) in todolist"
+            v-bind:key="index"
+            v-bind:class="checked(a.done)"
+            v-on:click="doneToggle(index)">
             <span>{{ a.todo }}</span>
             <span v-if="a.done"> (완료)</span>
             <span class="close" v-on:click.stop="deleteTodo(index)">&#x00D7;</span>
@@ -62,33 +66,33 @@ ul li.checked::before {
 import eventBus from './EventBus.vue';
 
 export default {
-    created: function() {
-         eventBus.$on('add-todo', this.addTodo);
+    created() {
+        eventBus.$on('add-todo', this.addTodo);
     },
-    data: function() {
+    data() {
         return {
             todolist: [
-                { todo: "영화보기", done: false },
-                { todo: "주말 산책", done: true },
-                { todo: "ES6 학습", done: false },
-                { todo: "잠실 야구장", done: false },
+                { todo: '영화보기', done: false },
+                { todo: '주말 산책', done: true },
+                { todo: 'ES6 학습', done: false },
+                { todo: '잠실 야구장', done: false },
             ]
         };
     },
     methods: {
-        checked: function(done) {
+        checked(done) {
             if (done) return { checked: true };
-            else return { checked: false };
+            return { checked: false };
         },
-        addTodo: function(todo) {
-            if (todo !== "") {
-                this.todolist.push({ todo: todo, done: false });
+        addTodo(todo) {
+            if (todo !== '') {
+                this.todolist.push({ todo, done: false });
             }
         },
-        doneToggle: function(index) {
+        doneToggle(index) {
             this.todolist[index].done = !this.todolist[index].done;
         },
-        deleteTodo: function(index) {
+        deleteTodo(index) {
             this.todolist.splice(index, 1);
         }
     }
