@@ -17,7 +17,9 @@
             </nav>
         </div>
         <div class="container">
-            <component v-bind:is="currentView"></component>
+            <keep-alive include="about,home">
+                <component v-bind:is="currentView"></component>
+            </keep-alive>
         </div>
     </div>
 </template>
