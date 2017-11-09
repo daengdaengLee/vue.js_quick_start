@@ -45,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header {
     background-color: aqua;
     padding: 10px 0 0 0;
