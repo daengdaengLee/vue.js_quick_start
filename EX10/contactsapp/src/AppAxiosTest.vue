@@ -94,7 +94,19 @@ export default {
             });
         },
         updateContact() {
-
+            axios.put(`/api/contacts/${this.no}`, {
+                name: this.name,
+                tel: this.tel,
+                address: this.address
+            }).then((response) => {
+                console.log(response);
+                this.name = '';
+                this.tel = '';
+                this.address = '';
+                this.result = response.data;
+            }).catch((ex) => {
+                console.log('ERROR!!!! : ', ex);
+            });
         },
         deleteContact() {
 
