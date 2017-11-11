@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
     name: 'app',
@@ -52,7 +51,7 @@ export default {
     },
     methods: {
         fetchContacts() {
-            axios({
+            this.$axios({
                 method: 'GET',
                 url: '/api/contacts',
                 params: { pageno: 1, pagesize: 5 }
@@ -75,7 +74,7 @@ export default {
             */
         },
         addContact() {
-            axios.post('/api/contacts', {
+            this.$axios.post('/api/contacts', {
                 name: this.name,
                 tel: this.tel,
                 address: this.address
@@ -88,13 +87,13 @@ export default {
             });
         },
         fetchContactOne() {
-            axios.get(`/api/contacts/${this.no}`).then((response) => {
+            this.$axios.get(`/api/contacts/${this.no}`).then((response) => {
                 console.log(response);
                 this.result = response.data;
             });
         },
         updateContact() {
-            axios.put(`/api/contacts/${this.no}`, {
+            this.$axios.put(`/api/contacts/${this.no}`, {
                 name: this.name,
                 tel: this.tel,
                 address: this.address
@@ -109,7 +108,7 @@ export default {
             });
         },
         deleteContact() {
-            axios.delete(`/api/contacts/${this.no}`).then((response) => {
+            this.$axios.delete(`/api/contacts/${this.no}`).then((response) => {
                 console.log(response);
                 this.no = 0;
                 this.result = response.data;
@@ -122,7 +121,7 @@ export default {
             const file = this.$refs.photofile.files[0];
             data.append('photo', file);
 
-            axios.post(`/api/contacts/${this.no}/photo`, data).then((response) => {
+            this.$axios.post(`/api/contacts/${this.no}/photo`, data).then((response) => {
                 this.result = response.data;
             }).catch((ex) => {
                 console.log('updatePhoto failed', ex);
