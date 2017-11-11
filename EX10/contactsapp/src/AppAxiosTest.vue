@@ -118,7 +118,15 @@ export default {
             });
         },
         changePhoto() {
+            const data = new FormData();
+            const file = this.$refs.photofile.files[0];
+            data.append('photo', file);
 
+            axios.post(`/api/contacts/${this.no}/photo`, data).then((response) => {
+                this.result = response.data;
+            }).catch((ex) => {
+                console.log('updatePhoto failed', ex);
+            });
         }
     }
 };
