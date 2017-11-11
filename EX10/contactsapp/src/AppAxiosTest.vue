@@ -75,7 +75,17 @@ export default {
             */
         },
         addContact() {
-
+            axios.post('/api/contacts', {
+                name: this.name,
+                tel: this.tel,
+                address: this.address
+            }).then((response) => {
+                console.log(response);
+                this.result = response.data;
+                this.no = response.data.no;
+            }).catch((ex) => {
+                console.log('ERROR!!!! : ', ex);
+            });
         },
         fetchContactOne() {
             axios.get(`/api/contacts/${this.no}`).then((response) => {
