@@ -109,7 +109,13 @@ export default {
             });
         },
         deleteContact() {
-
+            axios.delete(`/api/contacts/${this.no}`).then((response) => {
+                console.log(response);
+                this.no = 0;
+                this.result = response.data;
+            }).catch((ex) => {
+                console.log('ERROR!!!! : ', ex);
+            });
         },
         changePhoto() {
 
