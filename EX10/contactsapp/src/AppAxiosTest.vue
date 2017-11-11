@@ -52,13 +52,36 @@ export default {
     },
     methods: {
         fetchContacts() {
-
+            axios({
+                method: 'GET',
+                url: '/api/contacts',
+                params: { pageno: 1, pagesize: 5 }
+            }).then((response) => {
+                console.log(response);
+                this.result = response.data;
+            }).catch((ex) => {
+                console.log('ERROR!!!! : ', ex);
+            });
+            /*
+            별칭 메서드 get을 이용한 방법, 동일하게 동작함.
+            axios.get('/api/contacts', {
+                params: { pageno: 1, pagesize: 15 }
+            }).then((response) => {
+                console.log(response);
+                this.result = response.data;
+            }).catch((ex) => {
+                console.log('ERROR!!!! : ', ex);
+            });
+            */
         },
         addContact() {
 
         },
         fetchContactOne() {
-
+            axios.get(`/api/contacts/${this.no}`).then((response) => {
+                console.log(response);
+                this.result = response.data;
+            });
         },
         updateContact() {
 
