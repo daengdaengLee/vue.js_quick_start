@@ -5,6 +5,8 @@ import axios from 'axios';
 import App from './App.vue';
 // import App from './AppAxiosTest.vue';
 
+require('es6-promise').polyfill();
+
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
