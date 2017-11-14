@@ -20,7 +20,8 @@ const store = new Vuex.Store({
             }
         },
         [Constant.DONE_TOGGLE]: (state, payload) => {
-            Object.defineProperty(state.todolist[payload.index], 'done', { value: !state.todolist[payload.index].done });
+            const changeState = state;
+            changeState.todolist[payload.index].done = !state.todolist[payload.index].done;
         },
         [Constant.DELETE_TODO]: (state, payload) => {
             state.todolist.splice(payload.index, 1);

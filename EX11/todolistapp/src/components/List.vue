@@ -63,37 +63,24 @@ ul li.checked::before {
     </ul>
 </template>
 <script type="text/javascript">
-import eventBus from './EventBus.vue';
+import Constant from '../constant';
 
 export default {
-    created() {
-        eventBus.$on('add-todo', this.addTodo);
-    },
-    data() {
-        return {
-            todolist: [
-                { todo: '영화보기', done: false },
-                { todo: '주말 산책', done: true },
-                { todo: 'ES6 학습', done: false },
-                { todo: '잠실 야구장', done: false },
-            ]
-        };
+    computed: {
+        todolist() {
+            return this.$store.state.todolist;
+        }
     },
     methods: {
         checked(done) {
             if (done) return { checked: true };
             return { checked: false };
         },
-        addTodo(todo) {
-            if (todo !== '') {
-                this.todolist.push({ todo, done: false });
-            }
-        },
         doneToggle(index) {
-            this.todolist[index].done = !this.todolist[index].done;
+            this.$store.commit(Constant.DONE_TOGGLE, { index });
         },
         deleteTodo(index) {
-            this.todolist.splice(index, 1);
+            this.$store.commit(Constant.DELETE_TODO, { index });
         }
     }
 };

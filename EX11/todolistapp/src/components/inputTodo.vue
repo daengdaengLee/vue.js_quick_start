@@ -26,22 +26,29 @@
 </style>
 <template>
     <div>
-        <input class="input" type="text" id="task" v-model.trim="todo" placeholder="입력 후 엔터!" v-on:keyup.enter="addTodo">
+        <input
+            class="input"
+            type="text"
+            id="task"
+            v-model.trim="todo"
+            placeholder="입력 후 엔터!"
+            v-on:keyup.enter="addTodo"
+        >
         <span class="addbutton" v-on:click="addTodo">추 가</span>
     </div>
 </template>
 <script>
-import eventBus from './EventBus.vue';
+import Constant from '../constant';
 
 export default {
     name: 'input-todo',
-    data: function() {
-        return { todo: "" }
+    data() {
+        return { todo: '' };
     },
     methods: {
-        addTodo: function() {
-            eventBus.$emit('add-todo', this.todo);
-            this.todo = "";
+        addTodo() {
+            this.$store.commit(Constant.ADD_TODO, { todo: this.todo });
+            this.todo = '';
         }
     }
 };
