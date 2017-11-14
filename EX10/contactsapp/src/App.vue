@@ -154,7 +154,11 @@ export default {
             });
         }
     },
-    watch: {}
+    watch: {
+        'contactlist.pageno': function contactListPageNo() {
+            this.$refs.pagebuttons.selected = this.contactlist.pageno - 1;
+        }
+    }
 };
 </script>
 
