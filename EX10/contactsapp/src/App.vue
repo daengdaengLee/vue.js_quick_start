@@ -28,7 +28,7 @@ import AddContact from './components/AddContact.vue';
 import UpdateContact from './components/UpdateContact.vue';
 import UpdatePhoto from './components/UpdatePhoto.vue';
 
-import CONF from './Config';
+import conf from './Config';
 import eventBus from './EventBus';
 
 export default {
@@ -52,7 +52,7 @@ export default {
             },
             contactlist: {
                 pageno: 1,
-                pagesize: CONF.PAGESIZE,
+                pagesize: conf('PAGESIZE', null),
                 totalcount: 0,
                 contacts: []
             }
@@ -60,7 +60,63 @@ export default {
     },
     mounted() {},
     computed: {},
-    methods: {},
+    methods: {
+        pageChanged(page) {
+            this.contactlist.pageno = page;
+            this.fetchContacts();
+        },
+        fetchContacts() {
+            this.$axios.get(conf('FETCH', null), {
+                params: {
+                    pageno: this.contactlist.pageno,
+                    pagesize: this.contactlist.pagesize
+                }
+            }).then((response) => {
+                this.contactlist = response.data;
+            }).catch((ex) => {
+                console.log('fetchContacts failed : ', ex);
+                this.contactlist.contacts = [];
+            });
+        },
+        addContact(contact) {
+            this.$axios.post(conf('ADD', null), contact).then(() => {
+                this.contactlist.pageno = 1;
+                this.fetchContacts();
+            }).catch((ex) => {
+                console.log('addContact failed : ', ex);
+            });
+        },
+        updateContact(contact) {
+            this.$axios.put(conf('UPDATE', contact.no), contact).then(() => {
+                this.fetchContacts();
+            }).catch((ex) => {
+                console.log('updateContact failed : ', ex);
+            });
+        },
+        fetchContactOne(no) {
+            this.$axios.get(conf('FETCH_ONE', no)).then((response) => {
+                this.contact = response.data;
+            }).catch((ex) => {
+                console.log('fetchContactOne failed : ', ex);
+            });
+        },
+        deleteContact(no) {
+            this.$axios.delete(conf('DELETE', no)).then(() => {
+                this.fetchContacts();
+            }).catch((ex) => {
+                console.log('deleteContact failed : ', ex);
+            });
+        },
+        updatePhoto(no, file) {
+            const data = new FormData();
+            data.append('photo', file);
+            this.$axios.post(conf('UPDATE_PHOTO', no), data).then(() => {
+                this.fetchContacts();
+            }).catch((ex) => {
+                console.log('updatePhoto failed : ', ex);
+            });
+        }
+    },
     watch: {}
 };
 </script>
