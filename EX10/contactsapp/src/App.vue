@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import Paginate from 'vuejs-paginate';
 
 import ContactList from './components/ContactList.vue';
@@ -71,7 +70,7 @@ export default {
             this.currentView = null;
             this.updateContact(contact);
         });
-        eventBus.$on('addContacForm', () => {
+        eventBus.$on('addContactForm', () => {
             this.currentView = 'add-contact';
         });
         eventBus.$on('editContactForm', (no) => {

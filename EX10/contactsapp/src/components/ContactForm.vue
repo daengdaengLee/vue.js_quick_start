@@ -1,7 +1,7 @@
 <template>
     <div class="modal">
         <div class="form" v-on:keyup.esc="cancelEvent">
-            <h3 class=heading>:: {{ headintText }}</h3>
+            <h3 class=heading>:: {{ headingText }}</h3>
             <div v-if="mode === 'update'" class="form-group">
                 <label>일련번호</label>
                 <input type="text" name="no" class="long" disabled v-model="contact.no">
