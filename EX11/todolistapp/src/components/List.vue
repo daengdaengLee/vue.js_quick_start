@@ -55,33 +55,31 @@ ul li.checked::before {
             v-for="(a, index) in todolist"
             v-bind:key="index"
             v-bind:class="checked(a.done)"
-            v-on:click="doneToggle(index)">
+            v-on:click="doneToggle({ index: index })">
             <span>{{ a.todo }}</span>
             <span v-if="a.done"> (완료)</span>
-            <span class="close" v-on:click.stop="deleteTodo(index)">&#x00D7;</span>
+            <span class="close" v-on:click.stop="deleteTodo({ index: index })">&#x00D7;</span>
         </li>
     </ul>
 </template>
 <script type="text/javascript">
+import { mapState, mapMutations } from 'vuex';
+import _ from 'lodash';
 import Constant from '../constant';
 
 export default {
-    computed: {
-        todolist() {
-            return this.$store.state.todolist;
-        }
-    },
-    methods: {
-        checked(done) {
-            if (done) return { checked: true };
-            return { checked: false };
+    computed: mapState(['todolist']),
+    methods: _.extend(
+        {
+            checked(done) {
+                if (done) return { checked: true };
+                return { checked: false };
+            }
         },
-        doneToggle(index) {
-            this.$store.commit(Constant.DONE_TOGGLE, { index });
-        },
-        deleteTodo(index) {
-            this.$store.commit(Constant.DELETE_TODO, { index });
-        }
-    }
+        mapMutations([
+            Constant.DELETE_TODO,
+            Constant.DONE_TOGGLE
+        ])
+    )
 };
 </script>
