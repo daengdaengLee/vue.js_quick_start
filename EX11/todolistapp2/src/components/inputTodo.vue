@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         addTodo() {
-            this.$store.commit(Constant.ADD_TODO, { todo: this.todo });
+            this.$store.dispatch(Constant.ADD_TODO, { todo: this.todo });
             this.todo = '';
         }
     }
