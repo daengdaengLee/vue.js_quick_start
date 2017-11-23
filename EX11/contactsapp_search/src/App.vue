@@ -1,6 +1,6 @@
 <template>
     <div>
-        <search placeholder="두 글자 이상 입력 후 엔터!"></search>
+        <search></search>
         <contact-list></contact-list>
     </div>
 </template>
