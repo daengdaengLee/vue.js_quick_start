@@ -1,27 +1,26 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Constant from '../constant';
-import SearchAPI from '../api/SearchAPI';
+import module1 from './module1';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        contacts: []
+        keywordlist: []
     },
     mutations: {
-        [Constant.SEARCH_CONTACT]: (state, payload) => {
+        [Constant.ADD_KEYWORD]: (state, payload) => {
             const beforeState = state;
-            beforeState.contacts = payload.contacts;
+            beforeState.keywordlist.splice(0, 0, payload.name);
         }
     },
     actions: {
-        [Constant.SEARCH_CONTACT]: ({ commit }, payload) => {
-            SearchAPI.searchContact(payload.name).then((response) => {
-                commit(Constant.SEARCH_CONTACT, { contacts: response.data });
-            });
+        [Constant.ADD_KEYWORD]: ({ commit }, payload) => {
+            commit(Constant.ADD_KEYWORD, payload);
         }
-    }
+    },
+    modules: { m1: module1 }
 });
 
 export default store;
