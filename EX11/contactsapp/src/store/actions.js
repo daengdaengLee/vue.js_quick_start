@@ -11,7 +11,9 @@ export default {
                 store.dispatch(Constant.CANCEL_FORM);
                 store.dispatch(Constant.FETCH_CONTACTS, { pageno: 1 });
             } else {
+                /* eslint-disable no-console */
                 console.log(`연락처 추가 실패 : ${response.data}`);
+                /* eslint-enable no-console */
             }
         });
     },
@@ -27,7 +29,9 @@ export default {
                 store.dispatch(Constant.CANCEL_FORM);
                 store.dispatch(Constant.FETCH_CONTACTS, { pageno: currentPageNo });
             } else {
+                /* eslint-disable no-console */
                 console.log(`연락처 변경 실패 : ${response.data}`);
+                /* eslint-enable no-console */
             }
         });
     },
