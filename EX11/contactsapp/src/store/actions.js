@@ -52,8 +52,7 @@ export default {
         if (typeof payload === 'undefined' || typeof payload.pageno === 'undefined') {
             pageno = 1;
         } else {
-            const { pageno: currentPageno } = payload;
-            pageno = currentPageno;
+            ({ pageno } = payload);
         }
         const { pagesize } = store.state.contactlist;
 
