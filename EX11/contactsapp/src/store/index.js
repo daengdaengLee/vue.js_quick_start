@@ -6,13 +6,12 @@ import mutations from './mutations';
 import actions from './actions';
 
 ES6Promise.polyfill();
-
 Vue.use(Vuex);
 
-const store = new Vuex.Store(
+const store = new Vuex.Store({
     state,
     mutations,
     actions
-);
+});
 
 export default store;

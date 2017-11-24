@@ -1,8 +1,8 @@
 <template>
     <div class="modal">
-        <div class="form" v-on:keyup.esc="cancelEvent">
-            <h3 class=heading>:: {{ headingText }}</h3>
-            <div v-if="mode === 'update'" class="form-group">
+        <div class="form" @keyup.esc="cancelEvent">
+            <h3 class="heading">:: {{headingText}}</h3>
+            <div v-if="mode=='update'"  class="form-group">
                 <label>일련번호</label>
                 <input type="text" name="no" class="long" disabled v-model="contact.no">
             </div>
@@ -43,13 +43,13 @@
                     type="button"
                     class="btn btn-primary"
                     v-bind:value="btnText"
-                    v-on:click="submitEvent()"
+                    @click="submitEvent()"
                 >
                 <input
                     type="button"
                     class="btn btn-primary"
                     value="취 소"
-                    v-on:click="cancelEvent()"
+                    @click="cancelEvent()"
                 >
             </div>
         </div>
@@ -57,12 +57,12 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import { mapState } from 'vuex';
+import _ from 'lodash';
 import Constant from '../constant';
 
 export default {
-    name: 'contact-form',
+    name: 'contactForm',
     computed: _.extend(
         {
             btnText() {
@@ -124,10 +124,10 @@ export default {
     display: block;
     margin: 10px 0 0 0;
 }
-.form label {
+.form label{
     text-align: left;
-    margin: 0 0 3px 0;
-    padding: 0;
+     margin: 0 0 3px 0;
+     padding:0px;
     display: block;
     font-weight: bold;
 }
@@ -135,13 +135,13 @@ export default {
     box-sizing: border-box;
     border: 1px solid #BEBEBE;
     padding: 7px;
-    margin: 0px;
+    margin: 0;
     outline: none;
 }
 .form .long {
     width: 100%;
 }
-.form .button {
+.form .button{
     background: #2B798D;
     padding: 8px 15px 8px 15px;
     border: none;
@@ -154,7 +154,7 @@ export default {
     background: #33A17F;
     font-weight: 300;
     text-align: left;
-    padding: 20px;
+    padding : 20px;
     color: #fff;
     margin: 5px 0 30px 0;
     padding: 10px;

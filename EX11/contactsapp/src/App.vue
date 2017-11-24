@@ -2,11 +2,11 @@
     <div id="container">
         <div class="page-header">
             <h1 class="text-center">연락처 관리 애플리케이션</h1>
-            <p>(Dynamic Component + Vuex + Axios)</p>
+            <p>(Dynamic Component + Vuex + Axios) </p>
         </div>
         <component :is="currentView"></component>
-        <contact-list></contact-list>
-        <paginate
+        <contactList></contactList>
+        <paginate ref="pagebuttons"
             :page-count="totalpage"
             :page-range="7"
             :margin-pages="3"
@@ -14,7 +14,8 @@
             :prev-text="'이전'"
             :next-text="'다음'"
             :container-class="'pagination'"
-            :page-class="'page-item'">
+            :page-class="'page-item'"
+        >
         </paginate>
     </div>
 </template>
@@ -33,10 +34,7 @@ import Constant from './constant';
 export default {
     name: 'app',
     components: {
-        ContactList,
-        ContactForm,
-        UpdatePhoto,
-        Paginate
+        ContactList, ContactForm, UpdatePhoto, Paginate
     },
     computed: _.extend(
         {
@@ -48,6 +46,11 @@ export default {
         },
         mapState(['contactlist', 'currentView'])
     ),
+    watch: {
+        'contactlist.pageno': function contactlistPageno(page) {
+            this.$refs.pagebuttons.selected = page - 1;
+        }
+    },
     mounted() {
         this.$store.dispatch(Constant.FETCH_CONTACTS);
     },
@@ -60,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css');
+@import url("https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css");
 
 #container {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

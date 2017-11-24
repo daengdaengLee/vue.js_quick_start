@@ -3,7 +3,7 @@ import CONF from '../Config';
 
 export default {
     fetchContacts(pageno, pagesize) {
-        return axios.get(CONF('FETCH', null), {
+        return axios.get(CONF('FETCH'), {
             params: {
                 pageno,
                 pagesize
@@ -14,7 +14,7 @@ export default {
         return axios.get(CONF('FETCH_ONE', no));
     },
     addContact(contact) {
-        return axios.post(CONF('ADD', null), contact);
+        return axios.post(CONF('ADD'), contact);
     },
     updateContact(contact) {
         return axios.put(CONF('UPDATE', contact.no), contact);
