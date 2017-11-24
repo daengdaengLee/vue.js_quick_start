@@ -51,25 +51,28 @@
 </template>
 
 <script>
-import eventBus from '../EventBus';
+import { mapState } from 'vuex';
+import Constant from '../constant';
 
 export default {
     name: 'contact-list',
-    props: ['contactlist'],
+    computed: mapState(['contactlist']),
     methods: {
         addContact() {
-            eventBus.$emit('addContactForm');
+            this.$store.dispatch(Constant.ADD_CONTACT_FORM);
         },
         editContact(no) {
-            eventBus.$emit('editContactForm', no);
+            this.$store.dispatch(Constant.EDIT_CONTACT_FORM, { no });
         },
         deleteContact(no) {
+            /* eslint-disable no-restricted-globals, no-alert */
             if (confirm('정말로 삭제하시겠습니까?') === true) {
-                eventBus.$emit('deleteContact', no);
+            /* eslint-enable no-restricted-globals, no-alert */
+                this.$store.dispatch(Constant.DELETE_CONTACT, { no });
             }
         },
         editPhoto(no) {
-            eventBus.$emit('editPhoto', no);
+            this.$store.dispatch(Constant.EDIT_PHOTO_FORM, { no });
         }
     }
 };
