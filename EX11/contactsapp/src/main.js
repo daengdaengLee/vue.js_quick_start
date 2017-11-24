@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import App from './App.vue';
+import store from './store';
 // import App from './AppAxiosTest.vue';
 
 require('es6-promise').polyfill();
@@ -12,6 +13,7 @@ Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
+    store,
     el: '#app',
     template: '<App/>',
     components: { App }
