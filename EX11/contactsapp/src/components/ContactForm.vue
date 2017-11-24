@@ -57,55 +57,42 @@
 </template>
 
 <script>
-import eventBus from '../EventBus';
+import _ from 'lodash';
+import { mapState } from 'vuex';
+import Constant from '../constant';
 
 export default {
     name: 'contact-form',
-    props: {
-        mode: {
-            type: String,
-            default: 'add'
-        },
-        contact: {
-            type: Object,
-            default() {
-                return {
-                    no: '',
-                    name: '',
-                    tel: '',
-                    address: '',
-                    photo: ''
-                };
+    computed: _.extend(
+        {
+            btnText() {
+                if (this.mode !== 'update') {
+                    return '추 가';
+                }
+                return '수 정';
+            },
+            headingText() {
+                if (this.mode !== 'update') {
+                    return '새로운 연락처 추가';
+                }
+                return '연락처 변경';
             }
-        }
-    },
+        },
+        mapState(['mode', 'contact'])
+    ),
     mounted() {
         this.$refs.name.focus();
-    },
-    computed: {
-        btnText() {
-            if (this.mode !== 'update') {
-                return '추 가';
-            }
-            return '수 정';
-        },
-        headingText() {
-            if (this.mode !== 'update') {
-                return '새로운 연락처 추가';
-            }
-            return '연락처 변경';
-        }
     },
     methods: {
         submitEvent() {
             if (this.mode === 'update') {
-                eventBus.$emit('updateSubmit', this.contact);
+                this.$store.dispatch(Constant.UPDATE_CONTACT);
             } else {
-                eventBus.$emit('addSubmit', this.contact);
+                this.$store.dispatch(Constant.ADD_CONTACT);
             }
         },
         cancelEvent() {
-            eventBus.$emit('cancel');
+            this.$store.dispatch(Constant.CANCEL_FORM);
         }
     }
 };
