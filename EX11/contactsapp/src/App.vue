@@ -5,7 +5,7 @@
             <p>(Dynamic Component + Vuex + Axios) </p>
         </div>
         <component :is="currentView"></component>
-        <contactList></contactList>
+        <contact-list></contact-list>
         <paginate ref="pagebuttons"
             :page-count="totalpage"
             :page-range="7"
