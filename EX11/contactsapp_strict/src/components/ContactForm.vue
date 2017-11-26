@@ -70,6 +70,13 @@ export default {
             }
         };
     },
+    created() {
+        this.currentContact.no = this.$store.state.contact.no;
+        this.currentContact.name = this.$store.state.contact.name;
+        this.currentContact.tel = this.$store.state.contact.tel;
+        this.currentContact.address = this.$store.state.contact.address;
+        this.currentContact.photo = this.$store.state.contact.photo;
+    },
     computed: _.extend(
         {
             btnText() {
