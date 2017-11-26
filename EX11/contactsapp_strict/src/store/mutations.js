@@ -28,5 +28,9 @@ export default {
     [Constant.FETCH_CONTACTS]: (state, payload) => {
         const storeState = state;
         storeState.contactlist = payload.contactlist;
+    },
+    [Constant.CHANGE_STATE_CONTACT]: (state, payload) => {
+        const storeState = state;
+        storeState.contact = payload;
     }
 };
