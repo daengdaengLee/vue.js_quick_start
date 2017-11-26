@@ -100,9 +100,9 @@ export default {
     methods: {
         submitEvent() {
             if (this.mode === 'update') {
-                this.$store.dispatch(Constant.UPDATE_CONTACT);
+                this.$store.dispatch(Constant.UPDATE_CONTACT, this.currentContact);
             } else {
-                this.$store.dispatch(Constant.ADD_CONTACT);
+                this.$store.dispatch(Constant.ADD_CONTACT, this.currentContact);
             }
         },
         cancelEvent() {
