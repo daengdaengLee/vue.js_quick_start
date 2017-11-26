@@ -63,6 +63,13 @@ import Constant from '../constant';
 
 export default {
     name: 'contactForm',
+    data() {
+        return {
+            currentContact: {
+                no: 0, name: '', tel: '', address: '', photo: ''
+            }
+        };
+    },
     computed: _.extend(
         {
             btnText() {
