@@ -23,7 +23,8 @@ export default {
             store.commit(Constant.EDIT_CONTACT_FORM, { contact: response.data });
         });
     },
-    [Constant.UPDATE_CONTACT]: (store) => {
+    [Constant.UPDATE_CONTACT]: (store, payload) => {
+        store.commit(Constant.CHANGE_STATE_CONTACT, payload);
         const currentPageNo = store.state.contactlist.pageno;
         contactAPI.updateContact(store.state.contact).then((response) => {
             if (response.data.status === 'success') {
