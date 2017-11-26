@@ -38,15 +38,13 @@ export default {
         };
     },
     created() {
-        this.no = this.$route.params.no;
+        this.no = Number(this.$route.params.no);
     },
     computed: {
         contact() {
             const { no } = this;
             const arr = this.contacts.filter(item => item.no === no);
-            if (arr.length === 1) {
-                return arr[0];
-            }
+            if (arr.length === 1) return arr[0];
             return {};
         }
     }
