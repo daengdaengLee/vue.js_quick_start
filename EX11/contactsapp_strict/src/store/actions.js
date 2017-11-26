@@ -5,7 +5,8 @@ export default {
     [Constant.ADD_CONTACT_FORM]: (store) => {
         store.commit(Constant.ADD_CONTACT_FORM);
     },
-    [Constant.ADD_CONTACT]: (store) => {
+    [Constant.ADD_CONTACT]: (store, payload) => {
+        store.commit(Constant.CHANGE_STATE_CONTACT, payload);
         contactAPI.addContact(store.state.contact).then((response) => {
             if (response.data.status === 'success') {
                 store.dispatch(Constant.CANCEL_FORM);
