@@ -92,7 +92,7 @@ export default {
                 return '연락처 변경';
             }
         },
-        mapState(['mode', 'contact'])
+        mapState(['mode'])
     ),
     mounted() {
         this.$refs.name.focus();
