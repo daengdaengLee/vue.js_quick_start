@@ -4,7 +4,7 @@
             <h3 class="heading">:: {{headingText}}</h3>
             <div v-if="mode=='update'"  class="form-group">
                 <label>일련번호</label>
-                <input type="text" name="no" class="long" disabled v-model="contact.no">
+                <input type="text" name="no" class="long" disabled v-model="currentContact.no">
             </div>
             <div class="form-group">
                 <label>이름</label>
@@ -12,7 +12,7 @@
                     type="text"
                     name="name"
                     class="long"
-                    v-model="contact.name"
+                    v-model="currentContact.name"
                     ref="name"
                     placeholder="이름을 입력하세요"
                 >
@@ -23,7 +23,7 @@
                     type="text"
                     name="tel"
                     class="long"
-                    v-model="contact.tel"
+                    v-model="currentContact.tel"
                     placeholder="전화번호를 입력하세요"
                 >
             </div>
@@ -33,7 +33,7 @@
                     type="text"
                     name="address"
                     class="long"
-                    v-model="contact.address"
+                    v-model="currentContact.address"
                     placeholder="주소를 입력하세요"
                 >
             </div>
