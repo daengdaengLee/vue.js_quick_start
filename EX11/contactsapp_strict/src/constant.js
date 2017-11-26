@@ -8,4 +8,5 @@ export default {
     EDIT_PHOTO_FORM: 'editPhotoForm', // 사진 편집폼 나타내기
     UPDATE_PHOTO: 'updatePhoto', // 사진 수정
     DELETE_CONTACT: 'deleteContact', // 연락처 삭제
+    CHANGE_STATE_CONTACT: 'changeStateContact' // Vuex의 contact state를 변경
 };
