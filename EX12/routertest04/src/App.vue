@@ -32,13 +32,14 @@ import ContactByNo from './components/ContactByNo.vue';
 const router = new VueRouter({
     routes: [
         { path: '/', component: Home },
-        { path: '/home', component: Home },
-        { path: '/about', component: About },
+        { path: '/home', name: 'home', component: Home },
+        { path: '/about', name: 'about', component: About },
         {
             path: '/contacts',
+            name: 'contacts',
             component: Contacts,
             children: [
-                { path: ':no', component: ContactByNo }
+                { path: ':no', name: 'contactbyno', component: ContactByNo }
             ]
         }
     ]
