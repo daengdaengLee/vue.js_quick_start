@@ -3,9 +3,9 @@
         <h1>연락처</h1>
         <div class="wrapper">
             <div class="box" v-for="c in contacts" :key="c.no">
-                <router-link :to="{ name: 'contactbyno', params: { no: c.no } }">
-                    {{ c.name }}
-                </router-link>
+                <span @click="navigate(c.no)" style="cursor: pointer">
+                    [ {{ c.name }} ]
+                </span>
             </div>
         </div>
         <router-view></router-view>
@@ -21,6 +21,21 @@ export default {
         return {
             contacts: contactlist.contacts
         };
+    },
+    methods: {
+        navigate(no) {
+            if (confirm('상세 정보를 보시겠습니까?')) { // eslint-disable-line no-restricted-globals, no-alert
+                this.$router.push(
+                    {
+                        name: 'contactbyno',
+                        params: { no },
+                    },
+                    () => {
+                        console.log(`/contacts/${no} 로 이동 완료!`); // eslint-disable-line no-console
+                    }
+                );
+            }
+        }
     }
 };
 </script>
