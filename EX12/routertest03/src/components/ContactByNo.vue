@@ -40,6 +40,11 @@ export default {
     created() {
         this.no = Number(this.$route.params.no);
     },
+    watch: {
+        $route(to) {
+            this.no = Number(to.params.no);
+        }
+    },
     computed: {
         contact() {
             const { no } = this;
