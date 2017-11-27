@@ -40,10 +40,10 @@ export default {
     created() {
         this.no = Number(this.$route.params.no);
     },
-    watch: {
-        $route(to) {
-            this.no = Number(to.params.no);
-        }
+    beforeRouteUpdate(to, from, next) {
+        console.log('** beforeRouteUpdate'); // eslint-disable-line no-console
+        this.no = Number(to.params.no);
+        next();
     },
     computed: {
         contact() {
