@@ -30,6 +30,7 @@ import Contacts from './components/Contacts.vue';
 import ContactByNo from './components/ContactByNo.vue';
 
 const router = new VueRouter({
+    mode: 'history',
     routes: [
         { path: '/', component: Home },
         { path: '/home', name: 'home', component: Home },
