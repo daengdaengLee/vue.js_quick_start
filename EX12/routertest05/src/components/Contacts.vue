@@ -31,7 +31,7 @@ export default {
                         params: { no },
                     },
                     () => {
-                        console.log(`/contacts/${no} 로 이동 완료!`); // eslint-disable-line no-console
+                        console.log(`$router.push()의 completeCallback : /contacts/${no} 로 이동 완료!`); // eslint-disable-line no-console
                     }
                 );
             }
