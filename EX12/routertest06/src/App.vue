@@ -28,6 +28,7 @@ import Home from './components/Home.vue';
 import About from './components/About.vue';
 import Contacts from './components/Contacts.vue';
 import ContactByNo from './components/ContactByNo.vue';
+import NotFound from './components/NotFound.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -52,7 +53,8 @@ const router = new VueRouter({
                     }
                 }
             ]
-        }
+        },
+        { path: '*', component: NotFound }
     ]
 });
 
