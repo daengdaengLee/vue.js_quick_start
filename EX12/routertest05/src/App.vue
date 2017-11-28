@@ -39,10 +39,26 @@ const router = new VueRouter({
             name: 'contacts',
             component: Contacts,
             children: [
-                { path: ':no', name: 'contactbyno', component: ContactByNo }
+                {
+                    path: ':no',
+                    name: 'contactbyno',
+                    component: ContactByNo,
+                    beforeEnter(to, from, next) {
+                        console.log(`@@ beforeEnter! : ${from.path} --> ${to.path}`); // eslint-disable-line no-console
+                        next();
+                    }
+                }
             ]
         }
     ]
+});
+
+router.beforeEach((to, from, next) => {
+    console.log(`** beforeEach!! : ${from.path} --> ${to.path}`); // eslint-disable-line no-console
+    next();
+});
+router.afterEach((to, from) => {
+    console.log(`** afterEach!! : ${from.path} --> ${to.path}`); // eslint-disable-line no-console
 });
 
 export default {
