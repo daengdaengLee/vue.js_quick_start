@@ -31,20 +31,14 @@ import contactlist from '../ContactList';
 
 export default {
     name: 'contact-by-no',
+    props: ['no'],
     data() {
         return {
-            no: 0,
             contacts: contactlist.contacts
         };
     },
-    created() {
-        this.no = Number(this.$route.params.no);
-    },
-    beforeRouteUpdate(to, from, next) {
-        console.log(`** beforeRouteUpdate : ${from.path} --> ${to.path}`); // eslint-disable-line no-console
-        this.no = Number(to.params.no);
-        next();
-    },
+    // created 이벤트 훅은 더이상 필요하지 않습니다. 삭제합니다.
+    // beforeRouteUpdate 내비게이션 보호 기능도 삭제합니다.
     computed: {
         contact() {
             const { no } = this;
