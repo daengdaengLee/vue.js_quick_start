@@ -41,7 +41,7 @@ export default {
         this.no = Number(this.$route.params.no);
     },
     beforeRouteUpdate(to, from, next) {
-        console.log('** beforeRouteUpdate'); // eslint-disable-line no-console
+        console.log(`** beforeRouteUpdate : ${from.path} --> ${to.path}`); // eslint-disable-line no-console
         this.no = Number(to.params.no);
         next();
     },
