@@ -45,6 +45,7 @@ const router = new VueRouter({
                     path: ':no',
                     name: 'contactbyno',
                     component: ContactByNo,
+                    props: true,
                     beforeEnter(to, from, next) {
                         console.log(`@@ beforeEnter! : ${from.path} --> ${to.path}`); // eslint-disable-line no-console
                         if (from.path.startsWith('/contacts')) next();
