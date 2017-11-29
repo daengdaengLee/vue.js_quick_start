@@ -8,6 +8,7 @@ export default {
             pageno = 1;
         } else {
             ({ pageno } = payload);
+            pageno = Number(pageno);
         }
         const { pagesize } = store.state.contactlist;
 
