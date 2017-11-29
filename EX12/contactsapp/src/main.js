@@ -15,24 +15,24 @@ Vue.config.productionTip = false;
 const router = new VueRouter({
     routes: [
         { path: '/', redirect: '/home' },
-        { path: '/home', name: 'home', components: Home },
-        { path: '/about', name: 'about', components: About },
+        { path: '/home', name: 'home', component: Home },
+        { path: '/about', name: 'aboout', component: About },
         {
             path: '/contacts',
             name: 'contacts',
-            components: ContactList,
+            component: ContactList,
             children: [
                 {
-                    path: 'add', name: 'addcontact', components: ContactForm
+                    path: 'add', name: 'addcontact', component: ContactForm
                 },
                 {
-                    path: 'update/:no', name: 'updatecontact', components: ContactForm, props: true
+                    path: 'update/:no', name: 'updatecontact', component: ContactForm, props: true
                 },
                 {
-                    path: 'photo/:no', name: 'updatephoto', components: UpdatePhoto, props: true
+                    path: 'photo/:no', name: 'updatephoto', component: UpdatePhoto, props: true
                 }
             ]
-        }
+        },
     ]
 });
 
