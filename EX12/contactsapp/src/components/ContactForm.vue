@@ -63,36 +63,47 @@ import Constant from '../constant';
 
 export default {
     name: 'contactForm',
+    data() {
+        return {
+            mode: 'add'
+        };
+    },
     computed: _.extend(
         {
             btnText() {
-                if (this.mode !== 'update') {
-                    return '추 가';
-                }
+                if (this.mode !== 'update') return '추 가';
                 return '수 정';
             },
             headingText() {
-                if (this.mode !== 'update') {
-                    return '새로운 연락처 추가';
-                }
+                if (this.mode !== 'update') return '새로운 연락처 추가';
                 return '연락처 변경';
             }
         },
-        mapState(['mode', 'contact'])
+        mapState(['contact', 'contactlist'])
     ),
     mounted() {
         this.$refs.name.focus();
+        const cr = this.$router.currentRoute;
+        if (cr.fullPath.indexOf('/add') > -1) {
+            this.mode = 'add';
+            this.$store.dispatch(Constant.INITIALIZE_CONTACT_ONE);
+        } else if (cr.fullPath.indexOf('/update') > -1) {
+            this.mode = 'update';
+            this.$store.dispatch(Constant.FETCH_CONTACT_ONE, { no: this.no });
+        }
     },
     methods: {
         submitEvent() {
             if (this.mode === 'update') {
                 this.$store.dispatch(Constant.UPDATE_CONTACT);
+                this.$router.push({ name: 'contacts', query: { page: this.contactlist.pageno } });
             } else {
                 this.$store.dispatch(Constant.ADD_CONTACT);
+                this.$router.push({ name: 'contacts', query: { page: 1 } });
             }
         },
         cancelEvent() {
-            this.$store.dispatch(Constant.CANCEL_FORM);
+            this.$router.push({ name: 'contacts', query: { page: this.contactlist.pageno } });
         }
     }
 };
