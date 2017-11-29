@@ -68,6 +68,7 @@ export default {
             mode: 'add'
         };
     },
+    props: ['no'],
     computed: _.extend(
         {
             btnText() {
