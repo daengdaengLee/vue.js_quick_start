@@ -89,6 +89,8 @@ export default {
             this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
             this.$refs.pagebuttons.selected = page - 1;
             next();
+        } else {
+            next();
         }
     },
     methods: {
