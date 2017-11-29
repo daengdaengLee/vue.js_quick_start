@@ -30,14 +30,19 @@ import Constant from '../constant';
 
 export default {
     name: 'updatePhoto',
-    computed: mapState(['contact']),
+    props: ['no'],
+    computed: mapState(['contact', 'contactlist']),
+    mounted() {
+        this.$store.dispatch(Constant.FETCH_CONTACT_ONE, { no: this.no });
+    },
     methods: {
         cancelEvent() {
-            this.$store.dispatch(Constant.CANCEL_FORM);
+            this.$router.push({ name: 'contacts', query: { page: this.contactlist.pageno } });
         },
         photoSubmit() {
             const file = this.$refs.photofile.files[0];
             this.$store.dispatch(Constant.UPDATE_PHOTO, { no: this.contact.no, file });
+            this.$router.push({ name: 'contacts', query: { page: this.contactlist.pageno } });
         }
     }
 };
