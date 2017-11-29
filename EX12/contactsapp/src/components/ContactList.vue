@@ -1,9 +1,9 @@
 <template>
     <div>
         <p class="addnew">
-            <button class="btn btn-primary" @click="addContact()">
+            <router-link class="btn btn-primary" :to="{ name: 'addcontact' }">
                 새로운 연락처 추가하기
-            </button>
+            </router-link>
         </p>
         <div id="example">
             <table id="list" class="table table-striped table-bordered table-hover">
@@ -40,32 +40,74 @@
                 </tbody>
             </table>
         </div>
+        <paginate
+            ref="pagebuttons"
+            :page-count="totalpage"
+            :page-range="7"
+            :margin-pages="3"
+            :click-handler="pageChanged"
+            :prev-text="'이전'"
+            :next-text="'다음'"
+            :container-class="'pagination'"
+            :page-class="'page-item'"
+        >
+        </paginate>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import Paginate from 'vuejs-paginate';
+import _ from 'lodash';
 import Constant from '../constant';
 
 export default {
     name: 'contactList',
-    computed: mapState(['contactlist']),
+    components: { Paginate },
+    computed: _.extend(
+        {
+            totalpage() {
+                const { totalcount } = this.contactlist;
+                const { pagesize } = this.contactlist;
+                return Math.floor((totalcount - 1) / pagesize) + 1;
+            }
+        },
+        mapState(['contactlist'])
+    ),
+    mounted() {
+        let page = 1;
+        if (this.$route.query && this.$route.query.page) {
+            page = parseInt(this.$route.query.page, 10);
+        }
+        this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
+        this.$refs.pagebuttons.selected = page - 1;
+    },
+    watch: {
+        $route(to) {
+            if (to.query.page && Number(to.query.page) !== this.contactlist.pageno) {
+                const { page } = to.query;
+                this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
+                this.$refs.pagebuttons.selected = page - 1;
+            }
+        }
+    },
     methods: {
-        addContact() {
-            this.$store.dispatch(Constant.ADD_CONTACT_FORM);
+        pageChanged(page) {
+            this.$router.push({ name: 'contacts', query: { page } });
         },
         editContact(no) {
-            this.$store.dispatch(Constant.EDIT_CONTACT_FORM, { no });
+            this.$router.push({ name: 'updatecontact', params: { no } });
         },
         deleteContact(no) {
-            /* eslint-disable no-restricted-globals, no-alert */
+            // eslint-disable-next-line no-restricted-globals, no-alert
             if (confirm('정말로 삭제하시겠습니까?') === true) {
-            /* eslint-enable no-restricted-globals, no-alert */
                 this.$store.dispatch(Constant.DELETE_CONTACT, { no });
+                this.$router.push({ name: 'contacts' });
             }
         },
         editPhoto(no) {
-            this.$store.dispatch(Constant.EDIT_PHOTO_FORM, { no });
+            this.$router.push({ name: 'updatephoto', params: { no } });
         }
     }
 };
