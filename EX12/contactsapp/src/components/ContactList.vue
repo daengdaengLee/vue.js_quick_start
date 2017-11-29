@@ -83,13 +83,12 @@ export default {
         this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
         this.$refs.pagebuttons.selected = page - 1;
     },
-    watch: {
-        $route(to) {
-            if (to.query.page && Number(to.query.page) !== this.contactlist.pageno) {
-                const { page } = to.query;
-                this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
-                this.$refs.pagebuttons.selected = page - 1;
-            }
+    beforeRouteUpdate(to, from, next) {
+        if (to.query.page && Number(to.query.page) !== this.contactlist.pageno) {
+            const { page } = to.query;
+            this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
+            this.$refs.pagebuttons.selected = page - 1;
+            next();
         }
     },
     methods: {
