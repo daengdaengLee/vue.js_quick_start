@@ -6,8 +6,11 @@ export default function (type, no) {
     case 'PAGESIZE':
         result = 5;
         break;
-    // 전체 연락처 데이터 요청(페이징 포함), 연락처 추가
+    // 전체 연락처 데이터 요청(페이징 포함)
     case 'FETCH':
+        result = `${BASE_URL}/contacts_long`;
+        break;
+    // 연락처 추가
     case 'ADD':
         result = `${BASE_URL}/contacts`;
         break;
