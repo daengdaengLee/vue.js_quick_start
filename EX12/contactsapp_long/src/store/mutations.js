@@ -15,5 +15,9 @@ export default {
         storeState.contact = {
             no: '', name: '', tel: '', address: '', photo: ''
         };
+    },
+    [Constant.CHANGE_ISLOADING]: (state, payload) => {
+        const storeState = state;
+        storeState.isloading = payload.isloading;
     }
 };
