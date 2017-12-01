@@ -48,19 +48,26 @@ ul li.checked::before {
     background-color: #f44336;
     color: white;
 }
+.list-enter-active, .list-leave-active {
+    transition: all 1s;
+}
+.list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(100px);
+}
 </style>
 <template>
-    <ul id="todolist">
+    <transition-group name="list" tag="ul">
         <li
             v-for="(a, index) in todolist"
-            v-bind:key="index"
+            v-bind:key="a.todo"
             v-bind:class="checked(a.done)"
             v-on:click="doneToggle({ index: index })">
             <span>{{ a.todo }}</span>
             <span v-if="a.done"> (완료)</span>
             <span class="close" v-on:click.stop="deleteTodo({ index: index })">&#x00D7;</span>
         </li>
-    </ul>
+    </transition-group>
 </template>
 <script type="text/javascript">
 import { mapState, mapActions } from 'vuex';
