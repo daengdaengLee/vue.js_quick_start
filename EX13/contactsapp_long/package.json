@@ -13,6 +13,7 @@
     "axios": "^0.16.2",
     "es6-promise": "^4.1.0",
     "lodash": "^4.17.4",
+    "velocity-animate": "^1.5.0",
     "vue": "^2.3.3",
     "vue-router": "^3.0.1",
     "vue-simple-spinner": "^1.2.8",
