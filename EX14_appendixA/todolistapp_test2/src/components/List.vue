@@ -57,7 +57,8 @@ ul li.checked::before {
 }
 </style>
 <template>
-    <transition-group name="list" tag="ul">
+    <!-- <transition-group name="list" tag="ul"> -->
+    <ul>
         <li
             v-for="(a, index) in todolist"
             v-bind:key="a.todo"
@@ -67,7 +68,8 @@ ul li.checked::before {
             <span v-if="a.done"> (완료)</span>
             <span class="close" v-on:click.stop="deleteTodo({ index: index })">&#x00D7;</span>
         </li>
-    </transition-group>
+    </ul>
+    <!-- </transition-group> -->
 </template>
 <script type="text/javascript">
 import { mapState, mapActions } from 'vuex';
